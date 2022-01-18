@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'flogg_clone_database',
         'USER': 'postgres',
-        'PASSWORD': 'default password',
+        'PASSWORD': 'ghostrider12',
         'HOST': 'localhost',
         'PORT': ''
     }
