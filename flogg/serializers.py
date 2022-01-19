@@ -34,7 +34,7 @@ class BrandSerializer(serializers.ModelSerializer):
 
 class DetailSerializer(serializers.ModelSerializer):
 
-    products = ProductGetSerializer(source="product_set", many=True)
+    # products = ProductGetSerializer(source="product_set", many=True)
 
     class Meta:
         model = Detail
@@ -52,23 +52,16 @@ class ProductPostSerializer(ModelSerializer):
         fields = ["name", "price", "category", "brand", "detail"]
 
     def create(self, validated_data):
-        print("you came  here")
+
         category = validated_data.pop("category")
         brand = validated_data.pop("brand")
         detail = validated_data.pop("detail")
-        print("category ->", category)
-        print("brand ->", brand)
-        print("detail ->", detail)
         try:
             category, _ = Category.objects.get_or_create(**category)
             brand, _ = Brand.objects.get_or_create(**brand)
             detail, _ = Detail.objects.get_or_create(**detail)
         except ValueError:
             return ValueError("error")
-
-        print("category ->", category)
-        print("brand ->", brand)
-        print("detail ->", detail)
 
         product = Product(**validated_data, category=category, brand=brand, detail=detail)
         return product
